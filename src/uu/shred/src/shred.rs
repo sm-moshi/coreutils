@@ -376,8 +376,8 @@ fn get_size(size_str_opt: Option<String>) -> Option<u64> {
 fn pass_name(pass_type: &PassType) -> String {
     match pass_type {
         PassType::Random => String::from("random"),
-        PassType::Pattern(Pattern::Single(byte)) => format!("{byte:x}{byte:x}{byte:x}"),
-        PassType::Pattern(Pattern::Multi([a, b, c])) => format!("{a:x}{b:x}{c:x}"),
+        PassType::Pattern(Pattern::Single(byte)) => format!("{byte:02x}{byte:02x}{byte:02x}"),
+        PassType::Pattern(Pattern::Multi([a, b, c])) => format!("{a:02x}{b:02x}{c:02x}"),
     }
 }
 
@@ -484,7 +484,7 @@ fn wipe_file(
         if verbose {
             let pass_name = pass_name(&pass_type);
             show_error!(
-                "{}: pass {:2}/{total_passes} ({pass_name})...",
+                "{}: pass {}/{total_passes} ({pass_name})...",
                 path.maybe_quote(),
                 i + 1,
             );
